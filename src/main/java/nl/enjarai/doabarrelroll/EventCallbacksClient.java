@@ -2,6 +2,7 @@ package nl.enjarai.doabarrelroll;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.RenderTickCounter;
 import nl.enjarai.doabarrelroll.api.RollEntity;
 import nl.enjarai.doabarrelroll.api.RollMouse;
@@ -9,9 +10,11 @@ import nl.enjarai.doabarrelroll.config.ModConfig;
 import nl.enjarai.doabarrelroll.impl.key.InputContextImpl;
 import nl.enjarai.doabarrelroll.render.HorizonLineWidget;
 import nl.enjarai.doabarrelroll.render.MomentumCrosshairWidget;
+import nl.enjarai.doabarrelroll.render.VelocityVectorWidget;
 import nl.enjarai.doabarrelroll.util.StarFoxUtil;
 import org.joml.Vector2d;
 import org.joml.Vector2i;
+import org.joml.Vector3d;
 
 public class EventCallbacksClient {
     public static void clientTick(MinecraftClient client) {
@@ -19,6 +22,7 @@ public class EventCallbacksClient {
 
         if (!DoABarrelRollClient.isFallFlying()) {
             DoABarrelRollClient.clearValues();
+            VelocityVectorWidget.clearValues();
         }
 
         ModKeybindings.clientTick(client);
@@ -36,6 +40,10 @@ public class EventCallbacksClient {
             if (ModConfig.INSTANCE.getShowHorizon()) {
                 HorizonLineWidget.render(context, scaledWidth, scaledHeight,
                         rollEntity.doABarrelRoll$getRoll(tickDelta), entity.getPitch(tickDelta));
+            }
+
+            if (ModConfig.INSTANCE.getShowVelocityVector()) {
+                VelocityVectorWidget.render(context, scaledWidth, scaledHeight);
             }
 
             if (ModConfig.INSTANCE.getMomentumBasedMouse() && ModConfig.INSTANCE.getShowMomentumWidget()) {

@@ -12,6 +12,7 @@ import nl.enjarai.doabarrelroll.config.LimitedModConfigServer;
 import nl.enjarai.doabarrelroll.config.ModConfig;
 import nl.enjarai.doabarrelroll.flight.RotationModifiers;
 import nl.enjarai.doabarrelroll.net.ClientNetworking;
+import nl.enjarai.doabarrelroll.render.VelocityVectorWidget;
 import nl.enjarai.doabarrelroll.util.MixinHooks;
 import nl.enjarai.doabarrelroll.util.StarFoxUtil;
 
@@ -64,6 +65,7 @@ public class DoABarrelRollClient {
         PITCH_SMOOTHER.clear();
         YAW_SMOOTHER.clear();
         ROLL_SMOOTHER.clear();
+
     }
 
     public static boolean isFallFlying() {
